@@ -3,7 +3,7 @@
 node {
   def root = pwd()
 
-  state('Setup') {
+  stage('Setup') {
     deleteDir()
     git([
       url: env.GIT_URL ? env.GIT_URL : 'https://github.com/venicegeo/dg-bf-tideprediction.git',
@@ -24,4 +24,3 @@ node {
     cfPush()
   }
 }
-
