@@ -41,7 +41,8 @@ if [ ! -d "$VIRTUALENV_ROOT" -o ! -f "$HISTORICAL_DATA_FILE" ]; then
 
     echo -e "\nInstalling Python dependencies\n"
 
-    pip install -r requirements.txt
+    pip install $(grep numpy requirements.txt)
+    pip install $(grep -v numpy requirements.txt)
 
 
     ############################################################################
