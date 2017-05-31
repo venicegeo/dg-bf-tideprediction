@@ -9,9 +9,9 @@ node {
         ])
     }
 
-    // stage('Test') {
-    //     sh 'echo y | ./scripts/test.sh'
-    // }
+    stage('Test') {
+        sh 'echo y | ./scripts/test.sh'
+    }
 
     stage('Archive') {
         sh 'echo y | ./scripts/package.sh'
