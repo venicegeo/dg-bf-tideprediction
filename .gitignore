@@ -1,10 +1,24 @@
+# IDE Stuff
+.vscode
+.idea
+.project
+.pydevproject
+
+
+# Development artifacts
+venv
 __pycache__
 *.pyc
+
+
+# Build artifacts
 fdh.sqlite
+fdh_test.sqlite
 bf-tideprediction.zip
 vendor
-.env
 .coverage
 report
-.vagrant
-venv/
+
+
+# Deployment artifacts
+manifest*.yml

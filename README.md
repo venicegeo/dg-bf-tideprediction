@@ -1,40 +1,37 @@
-# bf-tideprediction
+# dg-bf-tideprediction
 
-A simple service providing a series of REST Endpoint for predicting tides based on time and location. 
+A simple service providing a series of REST Endpoint for predicting tides based on time and location.
 
-# Development
 
-## Running (Local, Unix)
+## Running locally for development
 
-If developing on a Unix OS, you can run this project locally. Using `virtualenv` is recommended. With your environment established, simply run:
+Requires:
 
-```
-pip install -r requirements.txt
-./scripts/extract-historical-data.sh
-```
+- Python 2.7 with `virtualenv` installed
+- `virtualenv`
 
-Once the dependencies have been fetched, and data created, then you can run the Flask server by executing:
+From the terminal, execute:
 
 ```
-./scripts/run-locally.sh
+./scripts/develop.sh
 ```
 
-## Running (Vagrant)
 
-If developing on Windows, then Vagrant is required to run this software, as gunicorn does not support Unix (and Shell scripts currently have no Windows parallel). In order to run the Vagrant box, simply execute `vagrant up` from the root directory of this project. The application will be available at http://localhost:5000
+## Running unit tests
 
-## Testing
-
-### Run Unit Tests
+From the terminal, execute:
 
 ```
-nosetests --with-coverage --cover-erase --cover-package=bftideprediction
+./scripts/test.sh
 ```
 
-### Run Integration Tests
 
-```
-TIDES_HOST=localhost:5000 ./scripts/integration-test.sh
-```
+## Deploying Manually
 
-Change `TIDES_HOST` to whatever domain you're trying to test.
+1. From the terminal, execute:
+
+```bash
+./scripts/package.sh
+
+cf push -f manifest.jenkins.yml
+```

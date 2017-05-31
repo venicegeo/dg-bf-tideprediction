@@ -1,27 +1,28 @@
 @Library('pipelib@master') _
 
 node {
-  def root = pwd()
+    stage('Setup') {
+        deleteDir()
+        git([
+            url: 'https://github.com/venicegeo/dg-bf-tideprediction.git',
+            branch: 'master'
+        ])
+    }
 
-  stage('Setup') {
-    deleteDir()
-    git([
-      url: env.GIT_URL ? env.GIT_URL : 'https://github.com/venicegeo/dg-bf-tideprediction.git',
-      branch: "master"
-    ])
-  }
+    stage('Test') {
+        sh 'echo y | ./scripts/test.sh'
+    }
 
-  stage('Archive') {
-    sh """
-      virtualenv --python=/usr/bin/python3 .env
-      . .env/bin/activate
-      pip install numpy
-      pip install -r ./requirements.txt
-      ./scripts/extract-historical-data.sh
-    """
-  }
+    stage('Archive') {
+        sh 'echo y | ./scripts/package.sh'
+    }
 
-  stage('Staging Deploy') {
-    cfPush()
-  }
+    stage('Deploy') {
+        cfPush()
+        cfBgDeploy()
+    }
+
+    stage('Cleanup') {
+        deleteDir()
+    }
 }
